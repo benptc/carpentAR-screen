@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         // setting draw styles
         ctx = canvas.getContext("2d");
-        ctx.strokeStyle = "#000";
+        ctx.strokeStyle = "greenyellow";
         ctx.lineWidth = 20;
 
         initCanvas();
@@ -53,16 +53,19 @@ const initCanvas = function(){
     // end shape once mouse up and clear shape
     let stop = function() {
         // close shape
-        lineTo(shape[0][0], shape[0][1], ctx);
-        shape.push([shape[0][0], shape[0][1]]);
+        if (clicked) {
+            lineTo(shape[0][0], shape[0][1], ctx);
+            shape.push([shape[0][0], shape[0][1]]);
 
-        // end shape drawing
-        clicked = false;
-        shapeLibrary.push(shape);
+            // end shape drawing
+            clicked = false;
+            shapeLibrary.push(shape);
 
-        sendShape(shape);
-        console.log(shape);
-        shape = [];
+            // send shape
+            sendShape(shape);
+            console.log(shape);
+            shape = [];
+        }
     };
 
     // execute functions on event execution
@@ -85,3 +88,8 @@ function lineTo(x,y, ctx){
     ctx.lineTo(x,y);
     ctx.stroke();
 }
+
+// TODO: Create cut shape functionality
+const cutShape = function() {
+    console.log("cut");
+};
