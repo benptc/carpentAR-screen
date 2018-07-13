@@ -1,4 +1,46 @@
 body {
     background-repeat: no-repeat;
     background-size: cover;
+    /*background-image: url(vuforia-marker.jpg);*/
+}
+
+#vuforiaMarker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    user-select: none;
+}
+
+#canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(255,255,255,0.2);
+}
+
+.cut.button {
+    width: calc(220px - .5em);
+    height: calc(220px - .5em);
+    padding: .5em;
+    border: 2px solid deeppink;
+    display: flex;
+    position: absolute;
+    top: calc(50vh - 110px);
+    right: 60px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: white;
+    font-size: 50px;
+    font-family: sans-serif;
+    color: deeppink;
+}
+
+.message {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    color: white;
+    font-size: 40px;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }

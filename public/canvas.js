@@ -7,6 +7,7 @@
 const shapeLibrary = [];
 let canvas = undefined;
 let ctx = undefined;
+let drawingEnabled = false;
 
 // set canvas and add listeners once content has loaded
 document.addEventListener("DOMContentLoaded", function(){
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
         ctx.lineWidth = 20;
 
         initCanvas();
+        setDrawingEnabled(false);
         console.log("--xx--xx--xx--");
     }, 100);
 }, false );
@@ -33,6 +35,7 @@ const initCanvas = function(){
 
     // on mouse down start drawing a shape
     let start = function(e) {
+        if (!drawingEnabled) return;
         clicked = true;
         let x = e.clientX;
         let y = e.clientY;
@@ -42,6 +45,7 @@ const initCanvas = function(){
 
     // tracking mouse move while mouse down for path
     let move = function(e) {
+        if (!drawingEnabled) return;
         if(clicked){
             let x = e.clientX;
             let y = e.clientY;
@@ -52,6 +56,7 @@ const initCanvas = function(){
 
     // end shape once mouse up and clear shape
     let stop = function() {
+        if (!drawingEnabled) return;
         // close shape
         if (clicked) {
             lineTo(shape[0][0], shape[0][1], ctx);
@@ -89,7 +94,21 @@ function lineTo(x,y, ctx){
     ctx.stroke();
 }
 
+function setDrawingEnabled(newValue) {
+    if (!canvas) return;
+    // canvas.style.display = 'inline';
+    drawingEnabled = newValue;
+    if (drawingEnabled) {
+        canvas.style.opacity = '1';
+        document.querySelector('.message').style.display = 'none';
+    } else {
+        canvas.style.opacity = '0.5';
+        document.querySelector('.message').style.display = 'inline';
+    }
+}
+
 // TODO: Create cut shape functionality
 const cutShape = function() {
     console.log("cut");
+    sendCut();
 };

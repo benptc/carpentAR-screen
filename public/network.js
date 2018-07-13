@@ -7,8 +7,10 @@
 
 (function(exports) {
 
-    const serverIP = 'http://192.168.0.115:3000'; // socket.io server
+    const serverIP = 'http://192.168.0.115:5000/'; // socket.io server
     const socket = io(serverIP); // socket client
+
+    console.log('connect to server');
 
     // when the socket connects to a server, send the clientName so that it can
     // be distinguished from the HoloLens client
@@ -17,9 +19,19 @@
         socket.emit('clientName', 'workbenchClient');
     });
 
+    socket.on('ready', function() {
+        setDrawingEnabled(true);
+        console.log('hololens ready')
+    });
+
+    socket.on('notready', function() {
+        setDrawingEnabled(false);
+        console.log('hololens disconnected');
+    });
+
     // when we receive a base64-encoded image of the AR scene projection, render it to the background
     socket.on('projection', function(data) {
-        setBackgroundImageFromBase64(data);
+        // setBackgroundImageFromBase64(data); // TODO: implement
     });
 
     // sets the background image given a base64-encoded jpg image
@@ -71,16 +83,18 @@
 
     // call this on touch up to send the finished drawing path to the server
     const sendShape = function(shape) {
-        socket.emit('stencil', shape);
+        console.log('stencil');
+        socket.emit('stencil', JSON.stringify(shape));
     };
 
     // call this to stop extruding the current path
-    const cutExtrusion = function() {
+    const sendCut = function() {
+        console.log('cut');
         socket.emit('cut');
     };
 
     // only these two functions are public to the rest of the application
     exports.sendShape = sendShape;
-    exports.cutExtrusion = cutExtrusion;
+    exports.sendCut = sendCut;
 
 }(window));

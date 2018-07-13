@@ -3,32 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>CarpentAR</title>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="public/socket.io.js"></script>
     <script src="public/network.js"></script>
     <script src="public/canvas.js"></script>
-    <style>
-        .cut.button {
-            width: calc(220px - .5em);
-            height: calc(220px - .5em);
-            padding: .5em;
-            border: 2px solid deeppink;
-            display: flex;
-            position: absolute;
-            top: calc(50vh - 110px);
-            right: 60px;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background: white;
-            font-size: 50px;
-            font-family: sans-serif;
-            color: deeppink;}
-    </style>
+    <link rel="stylesheet" href="public/styles.css">
 </head>
 <body style="padding: 0; margin: 0; width: 100vw; height: 100vh;">
-    <canvas id="canvas" style="padding: 0;margin: 0"
+    <img src="public/vuforia-marker.jpg" id="vuforiaMarker">
+    <canvas id="canvas" style="padding: 0;margin: 0;"
         width="600px"
         height="600px"></canvas>
     <div class="cut button" onclick="cutShape()">CUT</div>
+    <div class="message">
+        Waiting for HoloLens to connect...
+    </div>
 </body>
 </html>
