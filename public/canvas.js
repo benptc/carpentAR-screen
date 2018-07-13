@@ -60,7 +60,7 @@ const initCanvas = function(){
         clicked = false;
         shapeLibrary.push(shape);
 
-        // TODO: send finished shape
+        sendShape(shape);
         console.log(shape);
         shape = [];
     };

@@ -69,9 +69,9 @@
         return new Blob(byteArrays, {type: contentType});
     };
 
-    // call this on touch up to finish drawing a path
-    const sendExtrusionPath = function() {
-        socket.emit('stencil', 'TODO ...point data...');
+    // call this on touch up to send the finished drawing path to the server
+    const sendShape = function(shape) {
+        socket.emit('stencil', shape);
     };
 
     // call this to stop extruding the current path
@@ -80,7 +80,7 @@
     };
 
     // only these two functions are public to the rest of the application
-    exports.sendExtrusionPath = sendExtrusionPath;
+    exports.sendShape = sendShape;
     exports.cutExtrusion = cutExtrusion;
 
 }(window));
